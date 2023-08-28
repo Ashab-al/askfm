@@ -1,0 +1,17 @@
+
+
+<div class="question">
+  <h3 class="question-title">
+    <%= question.text %>
+  </h3>
+
+  <span class="question-date">
+    <%= question.created_at %>
+  </span>
+
+  <% if question.answer.present? %>
+    <p class="question-answer">
+      <%= question.answer %>
+    </p>
+  <% end %>
+</div>

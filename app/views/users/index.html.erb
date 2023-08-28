@@ -1,0 +1,15 @@
+<h1 class="title">Все пользователи сайта</h1>
+
+<div class="users">
+  <% @users.each do |user| %>
+    <div class="user-card">
+      <h2 class="user-card__title">
+        <%= user.name %>
+      </h2>
+      <span class="user-card__username">
+        <%= user.username %>
+      </span>
+      <%= link_to 'Перейти в профиль', user_path(user), class: 'user-card__link' %>
+    </div>
+  <% end %>
+</div>

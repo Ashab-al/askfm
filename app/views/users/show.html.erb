@@ -1,0 +1,32 @@
+<h1 class="title">Профиль пользователя <%= @user.name %></h1>
+
+<div class="profile">
+  <h2 class="profile-username">Ник: <%= @user.username %></h2>
+  <div class="profile-avatar">
+    <%= image_tag user_avatar(@user), alt: 'аватар пользователя #{@user.name}' %>
+  </div>
+</div>
+
+<div class="questions">
+  <div class="form question-form">
+    <%= form_for @new_question do |f| %>
+      <%= f.hidden_field :user_id %>
+
+      <div class="form-field">
+        <%= f.label "Текст вопроса", class: 'form-label' %>
+        <%= f.text_area :text, class: 'form-textarea' %>
+      </div>
+
+      <%= submit_tag 'Задать вопрос', class: 'btn' %>
+
+    <% end %>
+  </div>
+  <div class="questions-wrap">
+    <h2> Количество: <%= @user.questions.size %> <%= declination_by_numbers(@user.questions.size, "Вопрос", "Вопроса", "Вопросов") %> </h2>
+
+    
+    <% @user.questions.each do |question| %>
+      <%= render partial: 'questions/question', object: question %>
+    <% end %>
+  </div>
+</div>
