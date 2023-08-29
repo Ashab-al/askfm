@@ -6,6 +6,8 @@
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+// taildind settings
+import '../css/application.css'
 
 Rails.start()
 ActiveStorage.start()
