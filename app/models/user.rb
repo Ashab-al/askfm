@@ -13,14 +13,19 @@ class User < ApplicationRecord
 
   has_many :questions, dependent: :destroy
 
-  validates :username, format: {with: USERNAME_REGEX}, 
+  validates :username, format: {with: USERNAME_REGEX,
+                                message: "должен быть в формате @username"}, 
                        presence: true,
                        uniqueness: true
   validates :email, format: {with: EMAIL_REGEX},
                     presence: true,
                     uniqueness: true
   validates :password, presence: true, on: :create,
-                      confirmation: true
+                      confirmation: true,
+                      length: { minimum: 8,
+                                message: "минимальная длина 8" },
+                      format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).*\z/,
+                                message: "должен включать хотя бы одну букву и одну цифру" }
 
   before_save :encrypt_password
 
