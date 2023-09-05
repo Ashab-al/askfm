@@ -26,6 +26,10 @@ class User < ApplicationRecord
                                 message: "минимальная длина 8" },
                       format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).*\z/,
                                 message: "должен включать хотя бы одну букву и одну цифру" }
+  validates :avatar_url, format: {with: /\Ahttps?:\/\/.*\z/,
+                                  message: "должен быть URL-адресом"},
+                                  allow_blank: true,
+                                  if: -> {avatar_url_changed?}
 
   before_save :encrypt_password
 
