@@ -23,6 +23,8 @@
             <% if current_user %>
               <%= f.hidden_field :user_id %>
               <%= f.hidden_field :author_name, value: current_user.username %>
+              <%= f.hidden_field :author_id, value: current_user.id %>
+
             <% else %>
               <div class="form-field mb-4">
                 <%= f.label "Ваше имя", class: 'block text-lg font-medium text-gray-900 dark:text-white' %>

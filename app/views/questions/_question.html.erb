@@ -9,7 +9,7 @@
       
       <% if question.author_name.present? %>
         <p class="question-answer mt-2 text-gray-700 dark:text-white">
-          Вопрос от: <%= question.author_name %> <%= link_to question.author_name, user_path(question.author_name) %>
+          Вопрос от: <%= question.author_name %> <%= link_to question.author_name, user_path(question.author_id) %>
         </p>
       <% end %>
 
@@ -40,7 +40,7 @@
       
       <% if question.author_name.present? %>
         <p class="question-answer mt-2 text-gray-700 dark:text-white">
-          Вопрос от: <%= question.author_name %> <%= link_to question.author_name, user_path(question.author_name) %>
+          Вопрос от: <%= question.author_name %> <%= link_to question.author_name, user_path(question.author_id) %>
         </p>
       <% end %>
 
@@ -70,7 +70,7 @@
     
     <% if question.author_name.present? %>
         <p class="question-answer mt-2 text-gray-700 dark:text-white">
-          Вопрос от: <%= question.author_name %> <%= link_to question.author_name, user_path(question.author_name) %>
+          Вопрос от: <%= question.author_name %> <%= link_to question.author_name, user_path(question.author_id) %>
         </p>
       <% end %>
 

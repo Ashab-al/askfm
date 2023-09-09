@@ -45,7 +45,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:text, :author_name, :user_id)
+    params.require(:question).permit(:text, :author_name, :user_id, :author_id)
   end
 
   def question_update_params
