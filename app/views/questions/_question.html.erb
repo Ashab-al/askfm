@@ -31,7 +31,7 @@
 
   <% end %>
 
-<% elsif question.author_name == current_user.username && current_user.present?%>
+<% elsif question.author_name == current_user&.username && current_user.present?%>
   <%= form_for question do |f| %>
     <div class="question bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 p-4 my-4">
       <span class="question-date text-gray-500 dark:text-gray-400">

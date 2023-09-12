@@ -15579,3 +15579,481 @@ Processing by UsersController#show as HTML
 Completed 200 OK in 29ms (Views: 23.5ms | ActiveRecord: 0.8ms | Allocations: 7597)
 
 
+Started GET "/" for 127.0.0.1 at 2023-09-12 12:26:45 +0300
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/index.html.erb within layouts/application (Duration: 55.8ms | Allocations: 6575)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendered layout layouts/application.html.erb (Duration: 96.7ms | Allocations: 9227)
+Completed 200 OK in 132ms (Views: 105.0ms | ActiveRecord: 1.5ms | Allocations: 16601)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 12:27:32 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (18.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[35m (24.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 1.2ms | Allocations: 1000)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 82)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.6ms | Allocations: 383)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 303)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 301)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 322)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 49)
+  Rendered users/show.html.erb within layouts/application (Duration: 69.2ms | Allocations: 10797)
+  Rendered layout layouts/application.html.erb (Duration: 69.6ms | Allocations: 11043)
+Completed 200 OK in 204ms (Views: 45.6ms | ActiveRecord: 43.1ms | Allocations: 22569)
+
+
+Started POST "/questions" for 127.0.0.1 at 2023-09-12 12:27:36 +0300
+Processing by QuestionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "question"=>{"user_id"=>"7", "author_name"=>"@mathey", "author_id"=>"10", "text"=>"вы"}, "commit"=>"Задать вопрос"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/questions_controller.rb:37:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:37:in `create'
+  [1m[36mQuestion Create (0.2ms)[0m  [1m[32mINSERT INTO "questions" ("text", "created_at", "updated_at", "user_id", "author_name", "author_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["text", "вы"], ["created_at", "2023-09-12 09:27:36.994641"], ["updated_at", "2023-09-12 09:27:36.994641"], ["user_id", 7], ["author_name", "@mathey"], ["author_id", "10"]]
+  ↳ app/controllers/questions_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (185.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/questions_controller.rb:37:in `create'
+Redirected to http://127.0.0.1:3000/users/ivan
+Completed 302 Found in 197ms (ActiveRecord: 186.1ms | Allocations: 7563)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 12:27:37 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 80)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.5ms | Allocations: 309)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 303)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 301)
+  Rendered questions/_question.html.erb (Duration: 0.4ms | Allocations: 321)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 320)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 49)
+  Rendered users/show.html.erb within layouts/application (Duration: 9.8ms | Allocations: 6600)
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | Allocations: 6841)
+Completed 200 OK in 13ms (Views: 10.2ms | ActiveRecord: 0.3ms | Allocations: 8208)
+
+
+Started GET "/log_out" for 127.0.0.1 at 2023-09-12 12:27:41 +0300
+Processing by SessionsController#destroy as HTML
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 403)
+
+
+Started GET "/" for 127.0.0.1 at 2023-09-12 12:27:41 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/index.html.erb within layouts/application (Duration: 3.5ms | Allocations: 1016)
+  Rendered layout layouts/application.html.erb (Duration: 4.5ms | Allocations: 1401)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.2ms | Allocations: 1803)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 12:27:42 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 24.7ms | Allocations: 2033)
+  Rendered layout layouts/application.html.erb (Duration: 25.1ms | Allocations: 2115)
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 0.2ms | Allocations: 3509)
+
+
+  
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+    17: 
+    18:     <div class="questions mt-8">
+    19:       <div class="form question-form">
+    20:         <% if @user.id != current_user.id%>
+    21:         <%= form_for @new_question do |f| %>
+    22:             
+    23:             <% if current_user %>
+  
+app/views/users/show.html.erb:20
+Started GET "/" for 127.0.0.1 at 2023-09-12 12:27:59 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/index.html.erb within layouts/application (Duration: 3.6ms | Allocations: 1004)
+  Rendered layout layouts/application.html.erb (Duration: 4.9ms | Allocations: 1411)
+Completed 200 OK in 6ms (Views: 5.5ms | ActiveRecord: 0.2ms | Allocations: 1805)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 12:38:51 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1616)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | Allocations: 1688)
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 1.0ms | Allocations: 3820)
+
+
+  
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+    17: 
+    18:     <div class="questions mt-8">
+    19:       <div class="form question-form">
+    20:         <% if @user.id != current_user.id%>
+    21:         <%= form_for @new_question do |f| %>
+    22:             
+    23:             <% if current_user %>
+  
+app/views/users/show.html.erb:20
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:12:06 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 4.9ms | Allocations: 2261)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | Allocations: 2339)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 1.0ms | Allocations: 5214)
+
+
+  
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+    17: 
+    18:     <div class="questions mt-8">
+    19:       <div class="form question-form">
+    20:         <% if @user&.id != current_user.id%>
+    21:         <%= form_for @new_question do |f| %>
+    22:             
+    23:             <% if current_user %>
+  
+app/views/users/show.html.erb:20
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:12:17 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 29.7ms | Allocations: 2386)
+  Rendered users/show.html.erb within layouts/application (Duration: 45.6ms | Allocations: 6771)
+  Rendered layout layouts/application.html.erb (Duration: 45.9ms | Allocations: 6849)
+Completed 500 Internal Server Error in 54ms (ActiveRecord: 0.8ms | Allocations: 9166)
+
+
+  
+ActionView::Template::Error (undefined method `username' for nil:NilClass):
+    31: 
+    32:   <% end %>
+    33: 
+    34: <% elsif question.author_name == current_user.username && current_user.present?%>
+    35:   <%= form_for question do |f| %>
+    36:     <div class="question bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 p-4 my-4">
+    37:       <span class="question-date text-gray-500 dark:text-gray-400">
+  
+app/views/questions/_question.html.erb:34
+app/views/users/show.html.erb:53
+app/views/users/show.html.erb:52
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:13:30 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 2.8ms | Allocations: 860)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 78)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.4ms | Allocations: 104)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 53)
+  Rendered users/show.html.erb within layouts/application (Duration: 25.3ms | Allocations: 6667)
+  Rendered layout layouts/application.html.erb (Duration: 45.2ms | Allocations: 7310)
+Completed 200 OK in 55ms (Views: 47.4ms | ActiveRecord: 0.8ms | Allocations: 9570)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:13:54 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 79)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 78)
+  Rendered questions/_question.html.erb (Duration: 0.6ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 53)
+  Rendered users/show.html.erb within layouts/application (Duration: 16.2ms | Allocations: 4805)
+  Rendered layout layouts/application.html.erb (Duration: 16.9ms | Allocations: 5028)
+Completed 200 OK in 22ms (Views: 17.2ms | ActiveRecord: 0.7ms | Allocations: 6413)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:13:55 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 79)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 78)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.6ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 53)
+  Rendered users/show.html.erb within layouts/application (Duration: 16.1ms | Allocations: 4805)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | Allocations: 5028)
+Completed 200 OK in 22ms (Views: 17.3ms | ActiveRecord: 0.6ms | Allocations: 6341)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:14:01 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 79)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 78)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.7ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 53)
+  Rendered users/show.html.erb within layouts/application (Duration: 18.0ms | Allocations: 4805)
+  Rendered layout layouts/application.html.erb (Duration: 18.8ms | Allocations: 5028)
+Completed 200 OK in 25ms (Views: 19.2ms | ActiveRecord: 0.6ms | Allocations: 6341)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:14:03 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 0.4ms | Allocations: 79)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 78)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.4ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 53)
+  Rendered users/show.html.erb within layouts/application (Duration: 19.5ms | Allocations: 4805)
+  Rendered layout layouts/application.html.erb (Duration: 20.9ms | Allocations: 5028)
+Completed 200 OK in 27ms (Views: 21.3ms | ActiveRecord: 0.6ms | Allocations: 6341)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:14:26 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 80)
+  Rendered questions/_question.html.erb (Duration: 0.5ms | Allocations: 78)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 53)
+  Rendered users/show.html.erb within layouts/application (Duration: 14.1ms | Allocations: 4809)
+  Rendered layout layouts/application.html.erb (Duration: 14.6ms | Allocations: 5032)
+Completed 200 OK in 19ms (Views: 14.7ms | ActiveRecord: 0.5ms | Allocations: 6346)
+
+
+Started GET "/" for 127.0.0.1 at 2023-09-12 13:14:27 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/index.html.erb within layouts/application (Duration: 92.6ms | Allocations: 1115)
+  Rendered layout layouts/application.html.erb (Duration: 93.9ms | Allocations: 1466)
+Completed 200 OK in 96ms (Views: 94.4ms | ActiveRecord: 0.4ms | Allocations: 1939)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:14:28 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 79)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 78)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 53)
+  Rendered users/show.html.erb within layouts/application (Duration: 16.5ms | Allocations: 4806)
+  Rendered layout layouts/application.html.erb (Duration: 17.2ms | Allocations: 5029)
+Completed 200 OK in 22ms (Views: 17.5ms | ActiveRecord: 0.6ms | Allocations: 6343)
+
+
+Started GET "/" for 127.0.0.1 at 2023-09-12 13:14:30 +0300
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/index.html.erb within layouts/application (Duration: 4.3ms | Allocations: 906)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | Allocations: 1257)
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.2ms | Allocations: 1603)
+
+
+Started GET "/users/ivan" for 127.0.0.1 at 2023-09-12 13:14:32 +0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"ivan"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."slug" = ? LIMIT ?[0m  [["slug", "ivan"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:47:in `load_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:49
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."user_id" = ?[0m  [["user_id", 7]]
+  ↳ app/views/users/show.html.erb:52
+  Rendered questions/_question.html.erb (Duration: 0.4ms | Allocations: 79)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 78)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 76)
+  Rendered questions/_question.html.erb (Duration: 0.2ms | Allocations: 74)
+  Rendered questions/_question.html.erb (Duration: 0.4ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered questions/_question.html.erb (Duration: 0.1ms | Allocations: 53)
+  Rendered users/show.html.erb within layouts/application (Duration: 17.2ms | Allocations: 4806)
+  Rendered layout layouts/application.html.erb (Duration: 18.4ms | Allocations: 5030)
+Completed 200 OK in 24ms (Views: 18.8ms | ActiveRecord: 0.6ms | Allocations: 6363)
+
+
