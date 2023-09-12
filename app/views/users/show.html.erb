@@ -19,14 +19,16 @@
       <div class="form question-form">
         <% if @user&.id != current_user&.id%>
         <%= form_for @new_question do |f| %>
+          <%= f.hidden_field :user_id %>
             
             <% if current_user %>
-              <%= f.hidden_field :user_id %>
+              
               <%= f.hidden_field :author_name, value: current_user.username %>
               <%= f.hidden_field :author_id, value: current_user.id %>
 
             <% else %>
               <div class="form-field mb-4">
+              
                 <%= f.label "Ваше имя", class: 'block text-lg font-medium text-gray-900 dark:text-white' %>
                 <%= f.text_area :author_name, class: 'form-textarea bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' %>
               </div>
