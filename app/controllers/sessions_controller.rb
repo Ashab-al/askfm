@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       flash[:success] = "#{@user.name}, вы успешно вошли в аккаунт!"
       redirect_to root_url
     else
-      flash[:danger] = "#{@user.name}, неправильный логин или пароль!"
+      flash[:danger] = "#{@user.email}, неправильный логин или пароль!"
       render :new
     end
   end
