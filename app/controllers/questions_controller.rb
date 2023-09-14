@@ -1,4 +1,8 @@
 class QuestionsController < ApplicationController
+  before_action :check_author_id, only: [:update]
+  belongs_to :author, class_name: 'User', optional: true
+
+  
   def index
     @questions = Question.all
   end
@@ -19,7 +23,7 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
-  
+
     if @question.update(question_update_params)
       # Обновление прошло успешно
       #redirect_to @question, notice: "Вопрос успешно обновлен"
@@ -51,4 +55,11 @@ class QuestionsController < ApplicationController
   def question_update_params
     params.require(:question).permit(:answer, :text)
   end
+
+  def check_author_id
+    if question_params[:author_id].present? && (current_user.id != question_params[:author_id])
+      redirect_to root_path, alert: 'Доступ запрещён'
+    end
+  end
+  
 end
