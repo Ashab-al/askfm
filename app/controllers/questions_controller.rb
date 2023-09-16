@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :check_author_id, only: [:update]
-  belongs_to :author, class_name: 'User', optional: true
+  before_action :checking_for_nil_text_author_name, only: [:create, :update]
 
   
   def index
@@ -25,11 +25,8 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     if @question.update(question_update_params)
-      # Обновление прошло успешно
-      #redirect_to @question, notice: "Вопрос успешно обновлен"
       redirect_back fallback_location: root_path, notice: "Вопрос успешно обновлен"
     else
-      # Обновление не удалось
       render 'edit'
     end
   end
@@ -43,6 +40,7 @@ class QuestionsController < ApplicationController
     else
       render 'new'
     end
+    
   end
   
 
@@ -62,4 +60,10 @@ class QuestionsController < ApplicationController
     end
   end
   
+  def checking_for_nil_text_author_name
+    unless question_params[:text].present? || question_params[:author_name].present?
+      redirect_back fallback_location: root_path, notice: "Поля должны быть заполнены"
+    end
+  end
+
 end

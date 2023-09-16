@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_09_231816) do
+ActiveRecord::Schema.define(version: 2023_09_15_161305) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2023_09_09_231816) do
     t.integer "user_id", null: false
     t.string "author_name"
     t.string "author_id"
+    t.string "author"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
