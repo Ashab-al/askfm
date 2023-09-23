@@ -34,6 +34,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    #QuestionManager::QuestionCreator.call(question_params)
 
     if @question.save
       redirect_back fallback_location: root_path, notice: "Вопрос успешно добавлен"
