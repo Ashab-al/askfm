@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :users, except: [:delete]
   resources :sessions, only: [:new, :create, :destroy]
   resources :questions
+  resources :posts
+
 
   get 'sign_up' => 'users#new'
   get 'log_out' => 'sessions#destroy'
