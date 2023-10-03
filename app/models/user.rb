@@ -12,6 +12,8 @@ class User < ApplicationRecord
   friendly_id :username, use: :slugged
 
   has_many :questions, dependent: :destroy
+  has_many :posts, dependent: :destroy
+
 
   validates :username, format: {with: USERNAME_REGEX,
                                 message: "должен быть в формате @username"}, 
